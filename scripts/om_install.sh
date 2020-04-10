@@ -49,4 +49,3 @@
 		-user ${OM_USER} --password ${OM_PASS} \
 		--db-type mysql --db-host localhost --db-name ${OM_DB_NAME} \
 		--db-user ${OM_DB_USER} --db-pass ${OM_DB_PASS}
-fi
