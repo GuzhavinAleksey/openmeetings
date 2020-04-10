@@ -21,8 +21,7 @@ LABEL vendor="Apache OpenMeetings dev team"
 LABEL version="${OM_VERSION}"
 LABEL maintainer=dev@openmeetings.apache.org
 
-ARG BUILD_TYPE="min"
-ENV OM_TYPE=${BUILD_TYPE}
+
 ENV DB_ROOT_PASS '12345'
 ENV OM_USER="om_admin"
 ENV OM_PASS="1Q2w3e4r5t^y"
@@ -47,9 +46,6 @@ ENV PORTS=5443
 
 WORKDIR ${OM_HOME}
 RUN cat /etc/issue \
-  \
-  && echo "OM server of type ${OM_TYPE} will be built" \
-  \
   && apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
   && apt-get install -y --no-install-recommends \
