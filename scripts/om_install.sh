@@ -13,8 +13,7 @@
 # limitations under the License.
 # #############################################
 
-echo "OM server of type ${OM_TYPE} will be set-up"
-if [ "${OM_TYPE}" != "min" ]; then
+
 
 	apt-get update
 	apt-get install -y --no-install-recommends gnupg2 dirmngr
