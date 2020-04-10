@@ -21,7 +21,8 @@ LABEL vendor="Apache OpenMeetings dev team"
 LABEL version="${OM_VERSION}"
 LABEL maintainer=dev@openmeetings.apache.org
 
-
+ENV DAEMON_USER="nobody"
+ENV DAEMON_UID="65534"
 ENV OM_DATA_DIR="/opt/omdata"
 ENV work=/opt
 ENV OM_HOME=/opt/openmeetings
