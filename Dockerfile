@@ -41,7 +41,6 @@ RUN cat /etc/issue \
     unzip \
     wget \
     ghostscript \
-    libjpeg62 \
     libgs-dev \
     imagemagick \
     sox \
