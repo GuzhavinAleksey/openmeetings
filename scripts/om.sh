@@ -14,6 +14,7 @@
 # limitations under the License.
 # #############################################
 
+export CATALINA_OPTS="-DDATA_DIR=${OM_DATA_DIR}"
 
 fi
 cd ${OM_HOME}
