@@ -54,6 +54,8 @@ RUN cat /etc/issue \
     dirmngr \
     unzip \
     wget \
+    curl \
+    nano \
     ghostscript \
     libgs-dev \
     imagemagick \
