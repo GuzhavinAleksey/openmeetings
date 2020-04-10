@@ -17,8 +17,6 @@
 
 CLASSES_HOME=${OM_HOME}/webapps/openmeetings/WEB-INF/classes
 
-	service kurento-media-server start
-
 if [ -n "${OM_KURENTO_WS_URL}" ]; then
 	sed -i "s|p:kurentoWsUrl=\"\"|p:kurentoWsUrl=\"${OM_KURENTO_WS_URL}\"|g" ${CLASSES_HOME}/applicationContext.xml
 fi
