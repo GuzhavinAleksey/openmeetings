@@ -20,7 +20,7 @@ if [ ! -d "${OM_HOME}/logs" ]; then
 fi
 chown -R ${DAEMON_USER} ${OM_HOME}
 
-if [ "${OM_TYPE}" != "min" ]; then
+
 	if [ ! -d "/var/run/mysqld" ]; then
 		mkdir /var/run/mysqld
 	fi
