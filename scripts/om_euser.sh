@@ -30,4 +30,3 @@ chown -R ${DAEMON_USER} ${OM_HOME}
 	fi
 	usermod -d /var/lib/mysql mysql
 	chown -R mysql:mysql /var/lib/mysql /var/run/mysqld && service mysql restart
-fi
