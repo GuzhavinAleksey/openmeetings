@@ -21,8 +21,23 @@ LABEL vendor="Apache OpenMeetings dev team"
 LABEL version="${OM_VERSION}"
 LABEL maintainer=dev@openmeetings.apache.org
 
+ARG BUILD_TYPE="min"
+ENV OM_TYPE=${BUILD_TYPE}
+ENV DB_ROOT_PASS '12345'
+ENV OM_USER="om_admin"
+ENV OM_PASS="1Q2w3e4r5t^y"
 ENV DAEMON_USER="nobody"
 ENV DAEMON_UID="65534"
+ENV OM_DB_NAME="openmeetings"
+ENV OM_DB_TYPE="mysql"
+ENV OM_DB_HOST="localhost"
+ENV OM_DB_PORT="3306"
+ENV OM_DB_USER="om_admin"
+ENV OM_DB_PASS="12345"
+ENV OM_KURENTO_WS_URL="ws://127.0.0.1:8888/kurento"
+ENV TURN_URL=""
+ENV TURN_USER=""
+ENV TURN_PASS=""
 ENV OM_DATA_DIR="/opt/omdata"
 ENV work=/opt
 ENV OM_HOME=/opt/openmeetings
@@ -32,6 +47,8 @@ ENV PORTS=5443
 
 WORKDIR ${OM_HOME}
 RUN cat /etc/issue \
+  \
+  && echo "OM server of type ${OM_TYPE} will be built" \
   \
   && apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
@@ -59,11 +76,24 @@ RUN cat /etc/issue \
   && wget https://repo1.maven.org/maven2/com/ibm/db2/jcc/${DB2_J_VER}/jcc-${DB2_J_VER}.jar -P ${OM_HOME}/webapps/openmeetings/WEB-INF/lib \
   && sed -i 's|<policy domain="coder" rights="none" pattern="PS" />|<!--policy domain="coder" rights="none" pattern="PS" />|g; s|<policy domain="coder" rights="none" pattern="XPS" />|<policy domain="coder" rights="none" pattern="XPS" /-->|g' /etc/ImageMagick-6/policy.xml
 
+#  && wget "https://archive.apache.org/dist/openmeetings/${OM_VERSION}/bin/apache-openmeetings-${OM_VERSION}.tar.gz" -O ${work}/om.tar.gz \
+#  && wget "https://archive.apache.org/dist/openmeetings/${OM_VERSION}/bin/apache-openmeetings-${OM_VERSION}.tar.gz.asc" -O ${work}/om.asc \
+#  && export GNUPGHOME="$(mktemp -d)" \
+#  && for server in hkp://ipv4.pool.sks-keyservers.net:80 \
+#                     hkp://ha.pool.sks-keyservers.net:80 \
+#                     hkp://pgp.mit.edu:80 \
+#                     hkp://keyserver.pgp.com:80 \
+#    ; do \
+#      gpg --keyserver "$server" --recv-keys 8456901E && break || echo "Trying new server..." \
+#    ; done \
+#  && gpg --batch --verify ${work}/om.asc ${work}/om.tar.gz \
+#  && rm -rf ${GNUPGHOME} ${work}/om.asc ${work}/om.tar.gz \
 
 WORKDIR ${work}
 COPY scripts/*.sh ./
 
-RUN chmod a+x ${work}/*.sh 
+RUN chmod a+x ${work}/*.sh \
+  && ./om_install.sh
 
 EXPOSE ${PORTS}
 
