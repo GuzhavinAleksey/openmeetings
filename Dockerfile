@@ -96,3 +96,4 @@ RUN chmod a+x ${work}/*.sh \
 EXPOSE ${PORTS}
 
 ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
+VOLUME ["/opt/openmeetings/webapps/openmeetings/WEB-INF/classes", "/opt/openmeetings/conf", "/var/lib/mysql"]
