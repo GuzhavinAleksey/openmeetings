@@ -1,5 +1,5 @@
 # openmeetings
-Docker image for OM (version 5.0.0-M4, WebRTC SEMI-STABLE)
+Docker image for OM (version 5.0.0-M5, WebRTC SEMI-STABLE)
 |Description|Value|
 |-----------|-----|
 |Db type| MySql|
@@ -10,4 +10,5 @@ Docker image for OM (version 5.0.0-M4, WebRTC SEMI-STABLE)
 |OM admin user password|`1Q2w3e4r5t^y`|
 
 # See example docker-compose.yml file!
-
+mkdir:
+mkdir -p openweb/{classes,conf,mysql}
