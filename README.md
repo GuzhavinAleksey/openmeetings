@@ -11,4 +11,4 @@ Docker image for OM (version 5.0.0-M5, WebRTC SEMI-STABLE)
 
 # See example docker-compose.yml file!
 mkdir:
-mkdir -p openweb/{classes,conf,mysql}
+mkdir -p openweb/{classes,conf,mysql} && mkdir coturn
