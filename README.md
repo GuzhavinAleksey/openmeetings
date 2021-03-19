@@ -1,5 +1,5 @@
 # openmeetings
-Docker image for OM (version 6.0.0, WebRTC SEMI-STABLE)
+Docker image for OM (version 6.1.0, WebRTC SEMI-STABLE)
 |Description|Value|
 |-----------|-----|
 |Db type| MySql|
