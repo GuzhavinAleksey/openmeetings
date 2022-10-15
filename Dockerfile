@@ -21,7 +21,6 @@ LABEL vendor="Apache OpenMeetings dev team"
 LABEL version="${OM_VERSION}"
 LABEL maintainer=dev@openmeetings.apache.org
 
-
 ENV DB_ROOT_PASS '12345'
 ENV OM_USER="om_admin"
 ENV OM_PASS="1Q2w3e4r5t^y"
@@ -33,20 +32,20 @@ ENV OM_DB_HOST="localhost"
 ENV OM_DB_PORT="3306"
 ENV OM_DB_USER="om_admin"
 ENV OM_DB_PASS="12345"
-ENV OM_KURENTO_WS_URL=""
+ENV OM_KURENTO_WS_URL="ws://127.0.0.1:8888/kurento"
 ENV TURN_URL=""
 ENV TURN_USER=""
 ENV TURN_PASS=""
 ENV OM_DATA_DIR="/opt/omdata"
 ENV work=/opt
 ENV OM_HOME=/opt/openmeetings
-ENV MYSQL_J_VER="8.0.19"
-ENV DB2_J_VER="11.5.0.0"
+ENV MYSQL_J_VER="8.0.30"
+ENV DB2_J_VER="11.5.7.0"
 ENV PORTS=5443
+ENV SERVER_TZ=UTC
 
 WORKDIR ${OM_HOME}
-RUN cat /etc/issue \
-  && apt-get update && apt-get install -y --no-install-recommends \
+RUN apt-get update && apt-get install -y --no-install-recommends \
     apt-utils \
   && apt-get install -y --no-install-recommends \
     software-properties-common \
@@ -54,15 +53,15 @@ RUN cat /etc/issue \
     dirmngr \
     unzip \
     wget \
-    curl \
-    nano \
     ghostscript \
     libgs-dev \
     imagemagick \
     sox \
     sudo \
+    openjdk-17-jre
+
+RUN apt-get install -y --no-install-recommends \
     libreoffice \
-    openjdk-17-jre \
     ffmpeg \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
@@ -85,14 +84,23 @@ RUN cat /etc/issue \
 #      gpg --keyserver "$server" --recv-keys 8456901E && break || echo "Trying new server..." \
 #    ; done \
 #  && gpg --batch --verify ${work}/om.asc ${work}/om.tar.gz \
+#  && tar -xzf ${work}/om.tar.gz --strip-components=1 -C ${OM_HOME}/ \
 #  && rm -rf ${GNUPGHOME} ${work}/om.asc ${work}/om.tar.gz \
 
 WORKDIR ${work}
 COPY scripts/*.sh ./
 
-RUN chmod a+x ${work}/*.sh \
+RUN chmod a+x ${work}/*.sh
+
+ARG BUILD_TYPE="min"
+ENV OM_TYPE=${BUILD_TYPE}
+
+RUN cat /etc/issue \
+  \
+  && echo "OM server of type ${OM_TYPE} will be built" \
+  \
   && ./om_install.sh
 
 EXPOSE ${PORTS}
-VOLUME ["/opt/openmeetings/webapps/openmeetings/WEB-INF/classes", "/opt/openmeetings/conf", "/var/lib/mysql"]
+
 ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
