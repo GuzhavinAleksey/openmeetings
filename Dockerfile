@@ -62,7 +62,7 @@ RUN cat /etc/issue \
     sox \
     sudo \
     libreoffice \
-    openjdk-11-jre \
+    openjdk-17-jre \
     ffmpeg \
   && apt-get clean \
   && rm -rf /var/lib/apt/lists/* \
