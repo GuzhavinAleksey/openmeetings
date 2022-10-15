@@ -102,5 +102,5 @@ RUN cat /etc/issue \
   && ./om_install.sh
 
 EXPOSE ${PORTS}
-
+VOLUME ["/opt/openmeetings/webapps/openmeetings/WEB-INF/classes", "/opt/openmeetings/conf", "/var/lib/mysql"]
 ENTRYPOINT [ "bash", "-c", "${work}/om.sh" ]
