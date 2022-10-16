@@ -13,7 +13,8 @@
 # limitations under the License.
 # #############################################
 
-
+echo "OM server of type ${OM_TYPE} will be set-up"
+if [ "${OM_TYPE}" != "min" ]; then
 
 	apt-get update
 	apt-get install -y --no-install-recommends gnupg2 dirmngr
@@ -21,7 +22,7 @@
 
 	KURENTO_LIST="/etc/apt/sources.list.d/kurento.list"
 	echo "# Kurento Media Server" > ${KURENTO_LIST}
-	echo "deb [arch=amd64] http://ubuntu.openvidu.io/6.13.0 bionic kms6" >> ${KURENTO_LIST}
+	echo "deb [arch=amd64] http://ubuntu.openvidu.io/6.18.0 bionic kms6" >> ${KURENTO_LIST}
 
 	echo "mysql-server mysql-server/root_password password ${DB_ROOT_PASS}" | debconf-set-selections
 	echo "mysql-server mysql-server/root_password_again password ${DB_ROOT_PASS}" | debconf-set-selections
@@ -49,3 +50,6 @@
 		-user ${OM_USER} --password ${OM_PASS} \
 		--db-type mysql --db-host localhost --db-name ${OM_DB_NAME} \
 		--db-user ${OM_DB_USER} --db-pass ${OM_DB_PASS}
+fi
+
+echo "session required pam_limits.so" >> /etc/pam.d/common-session

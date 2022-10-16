@@ -57,6 +57,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libgs-dev \
     imagemagick \
     sox \
+    vim \
     sudo \
     openjdk-17-jre
 
