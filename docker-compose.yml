@@ -9,9 +9,7 @@ services:
       - 5443:5443
     #  - 5080:5080
     volumes:
-      - ./openweb/classes:/opt/openmeetings/webapps/openmeetings/WEB-INF/classes/openmeetings.properties
-      - ./openweb/conf:/opt/openmeetings/conf
-      - ./openweb/mysql:/var/lib/mysql
+      - ./openweb/openmeetings.properties:/opt/openmeetings/webapps/openmeetings/WEB-INF/classes/openmeetings.properties
     depends_on:
       - app_coturn
       - app_kurento
