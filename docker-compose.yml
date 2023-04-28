@@ -9,7 +9,7 @@ services:
       - 5443:5443
     #  - 5080:5080
     volumes:
-      - ./openweb/classes:/opt/openmeetings/webapps/openmeetings/WEB-INF/classes
+      - ./openweb/classes:/opt/openmeetings/webapps/openmeetings/WEB-INF/classes/openmeetings.properties
       - ./openweb/conf:/opt/openmeetings/conf
       - ./openweb/mysql:/var/lib/mysql
     depends_on:
