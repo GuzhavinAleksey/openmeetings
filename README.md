@@ -1,5 +1,12 @@
 # openmeetings
 Docker image for OM (version 7.1.0 WebRTC SEMI-STABLE)
+build image example
+```
+sh
+podman image build -t openmeetings -f Dockerfile
+
+```
+
 |Description|Value|
 |-----------|-----|
 |Db type| MySql|
