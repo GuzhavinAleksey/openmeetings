@@ -1,5 +1,5 @@
 # openmeetings
-- Docker image for OM (version 7.2.0 WebRTC SEMI-STABLE)
+- Docker image for OM (version 8.0.0 WebRTC SEMI-STABLE)
 - build image example
 ```
 podman image build -t openmeetings -f Dockerfile
